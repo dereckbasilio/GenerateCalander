@@ -1,7 +1,5 @@
 $(function() {
-	console.log("File Found");
-
-	var currentYear = 2015;
+	var currentYear = 2016;
 	var currentMonth = 5;
 	var daysInWeek = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
 	var daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];	
@@ -18,9 +16,10 @@ $(function() {
 		"october": [31, -1],
 		"november": [30, -1],
 		"december": [31, -1]
-	}
+	};
 	var findFirstDayOfMonth = function(){
 		var firstDayOfMonth = ((currentYear - 2012) + ((currentYear - 2012) % 4 + 1)) % 7;
+		months["febuary"][0] = currentYear % 4 === 0 ? 29 : 28;
 		for (var month in months) {
 			months[month][1] = firstDayOfMonth;
 			firstDayOfMonth += months[month][0] % 7;
@@ -30,21 +29,23 @@ $(function() {
 	};
 	findFirstDayOfMonth();
 	var calBody = $("#calBody");
-	var generateCalendar = function(genTable){
-		dayStart = 0;
-		daysInMonth = 30;
+	var generateCalendar = function(){
+		var dayStart = months[$("#monthSelect").val()][1];
+		var daysInMonth = months[$("#monthSelect").val()][0];
+		var currentDay = 0 - dayStart + 1;
+
 		console.log("Start Calendar Generation");
 		var tableHtml = "";
 		for (var i = 0; i < 5; i++) {
 			tableHtml += "<tr>";
 			for (var j = 0; j < 7; j++) {
-				if(dayStart > 0 && dayStart <= daysInMonth) tableHtml += "<td>" + dayStart + "</td>";
+				if(currentDay > 0 && currentDay <= daysInMonth) tableHtml += "<td>" + currentDay + "</td>";
 				else tableHtml += "<td></td>";
-				dayStart++;
+				currentDay++;
 			};
 			tableHtml += "</tr>";
 		};
-		calBody.append(tableHtml);
+		calBody.html(tableHtml);
 	};
 	$("#generateCalendarBtn").on("click", generateCalendar);
 });
