@@ -20,7 +20,7 @@ $(function() {
 		"december": [31, -1]
 	}
 	var findFirstDayOfMonth = function(){
-		var firstDayOfMonth = 4;
+		var firstDayOfMonth = ((currentYear - 2012) + ((currentYear - 2012) % 4 + 1)) % 7;
 		for (var month in months) {
 			months[month][1] = firstDayOfMonth;
 			firstDayOfMonth += months[month][0] % 7;
