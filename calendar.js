@@ -9,7 +9,7 @@ $(function() {
 		"january": [31, -1],
 		"febuary": [28, -1],
 		"march": [31, -1],
-		"april": [30, -1]
+		"april": [30, -1],
 		"may": [31, -1],
 		"june": [30, -1],
 		"july": [31, -1],
@@ -19,6 +19,16 @@ $(function() {
 		"november": [30, -1],
 		"december": [31, -1]
 	}
+	var findFirstDayOfMonth = function(){
+		var firstDayOfMonth = 4;
+		for (var month in months) {
+			months[month][1] = firstDayOfMonth;
+			firstDayOfMonth += months[month][0] % 7;
+			firstDayOfMonth = firstDayOfMonth >= 7 ? firstDayOfMonth - 7 : firstDayOfMonth;
+			console.log(month + " -> " + months[month]);
+		};
+	};
+	findFirstDayOfMonth();
 	var calBody = $("#calBody");
 	var generateCalendar = function(genTable){
 		dayStart = 0;
