@@ -1,8 +1,6 @@
 $(function() {
 	var currentYear = 2015;
 	var currentMonth = 5;
-	var daysInWeek = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
-	var daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];	
 	var months = {
 		"january": [31, -1],
 		"febuary": [28, -1],
@@ -18,6 +16,7 @@ $(function() {
 		"december": [31, -1]
 	};
 	var findFirstDayOfMonth = function(){
+		currentYear = parseInt($("#yearSelect").val());
 		var yearDifference = currentYear - 2012;
 		var firstDayOfMonth = yearDifference >= 4 ? ((yearDifference) + ((yearDifference) % 4 + 1)) % 7 : yearDifference + 1;
 		months["febuary"][0] = currentYear % 4 === 0 ? 29 : 28;
@@ -49,4 +48,5 @@ $(function() {
 		calBody.html(tableHtml);
 	};
 	$("#generateCalendarBtn").on("click", generateCalendar);
+	$("#yearSelect").focusout(findFirstDayOfMonth);
 });
