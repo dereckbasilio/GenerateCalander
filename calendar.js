@@ -18,7 +18,7 @@ $(function() {
 	var findFirstDayOfMonth = function(){
 		currentYear = parseInt($("#yearSelect").val());
 		var yearDifference = currentYear - 2012;
-		var firstDayOfMonth = yearDifference >= 4 ? ((yearDifference) + ((yearDifference) % 4 + 1)) % 7 : yearDifference + 1;
+		var firstDayOfMonth = yearDifference >= 4 ? (yearDifference + (Math.floor(yearDifference / 4) + 1)) % 7 : yearDifference + 1;
 		months["febuary"][0] = currentYear % 4 === 0 ? 29 : 28;
 		for (var month in months) {
 			months[month][1] = firstDayOfMonth;
