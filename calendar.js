@@ -1,5 +1,5 @@
 $(function() {
-	var currentYear = 2016;
+	var currentYear = 2015;
 	var currentMonth = 5;
 	var daysInWeek = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
 	var daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];	
@@ -18,7 +18,8 @@ $(function() {
 		"december": [31, -1]
 	};
 	var findFirstDayOfMonth = function(){
-		var firstDayOfMonth = ((currentYear - 2012) + ((currentYear - 2012) % 4 + 1)) % 7;
+		var yearDifference = currentYear - 2012;
+		var firstDayOfMonth = yearDifference >= 4 ? ((yearDifference) + ((yearDifference) % 4 + 1)) % 7 : yearDifference + 1;
 		months["febuary"][0] = currentYear % 4 === 0 ? 29 : 28;
 		for (var month in months) {
 			months[month][1] = firstDayOfMonth;
